@@ -4,8 +4,8 @@
   "description": "Simple wrapper around Google Maps API",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "test": "nodemon test/index.js --delay 1",
+    "start": "nodemon index.js --delay 1"
   },
   "keywords": [
     "google",
@@ -16,6 +16,13 @@
   "author": "pixeltopic",
   "license": "ISC",
   "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^6.0.2",
     "nodemon": "^1.18.10"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "lru-cache": "^5.1.1"
   }
 }
