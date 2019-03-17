@@ -1,0 +1,21 @@
+{
+  "name": "mapwrap",
+  "version": "1.0.0",
+  "description": "Simple wrapper around Google Maps API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "keywords": [
+    "google",
+    "maps",
+    "api",
+    "wrapper"
+  ],
+  "author": "pixeltopic",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}
