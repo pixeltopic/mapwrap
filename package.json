@@ -4,7 +4,7 @@
   "description": "Simple wrapper around Google Maps API",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/index.js",
+    "test": "mocha --recursive test",
     "start": "nodemon index.js --delay 1"
   },
   "keywords": [
