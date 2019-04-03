@@ -9,7 +9,7 @@ chai.use(chaiAsPromised)
 
 const expect = chai.expect;
 
-describe("MapWrap.geocode", () => {
+describe.skip("MapWrap.geocode", () => {
   let mapWrapInstance;
   let response;
 
