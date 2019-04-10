@@ -85,7 +85,7 @@ describe("MapWrap.nearbySearchPlaces", async () => {
     });
   });
 
-  describe("Testing Nearby Place Search", async () => {
+  describe.skip("Testing Nearby Place Search", async () => {
 
     let mapWrapInstance;
     let response;

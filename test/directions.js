@@ -30,15 +30,30 @@ describe("MapWrap.directions", async () => {
       mapWrapInstance = new MapWrap(key.GOOGLE_API_KEY);
     });
 
-    it("should throw a regular error", () => {
+    it("should throw an error", async () => {
       expect(mapWrapInstance.directions({ origin: "Anaheim" })).to.be.rejectedWith(Error);
       expect(mapWrapInstance.directions({ destination: "Irvine" })).to.be.rejectedWith(Error);
     });
   
-    it("should throw a type error", () => {
-      expect(mapWrapInstance.directions({ origin: 23, destination: 45})).to.be.rejectedWith(TypeError);
-      expect(mapWrapInstance.directions({ origin: 34.5, destination: "Irvine" })).to.be.rejectedWith(TypeError);
-      expect(mapWrapInstance.reverseGeocode({ origin: "Anaheim", destination: 54.3 })).to.be.rejectedWith(TypeError);
+    it("should throw an error", async () => {
+      expect(mapWrapInstance.directions({ origin: 23, destination: 45})).to.be.rejectedWith(Error);
+      expect(mapWrapInstance.directions({ origin: 34.5, destination: "Irvine" })).to.be.rejectedWith(Error);
+      expect(mapWrapInstance.reverseGeocode({ origin: "Anaheim", destination: 54.3 })).to.be.rejectedWith(Error);
+    });
+
+    it("should not allow incorrect mode with avoid indoors", async () => {
+      expect(mapWrapInstance.directions({ origin: "Anaheim", destination: "Irvine", mode: "walking", avoidIndoor: true })).to.not.be.rejectedWith(Error);
+      expect(mapWrapInstance.directions({ origin: "Anaheim", destination: "Irvine", mode: "driving", avoidIndoor: true })).to.be.rejectedWith(Error);
+    });
+
+    it("should not allow non-boolean values in avoid keys", async () => {
+      expect(mapWrapInstance.directions({ origin: "Anaheim", destination: "Irvine", mode: "driving", avoidTolls: "hey" })).to.be.rejectedWith(Error);
+      expect(mapWrapInstance.directions({ origin: "Anaheim", destination: "Irvine", mode: "driving", avoidTolls: true })).to.not.be.rejectedWith(Error);
+    });
+
+    it("should properly restrict modes of travel", async () => {
+      expect(mapWrapInstance.directions({ origin: "Anaheim", destination: "Irvine", mode: "driving" })).to.not.be.rejectedWith(Error);
+      expect(mapWrapInstance.directions({ origin: "Anaheim", destination: "Irvine", mode: "fishing" })).to.be.rejectedWith(Error);
     });
   
     it("should test DirectionsWrapper.getStartAddress", async () => {
