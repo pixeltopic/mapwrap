@@ -1,5 +1,5 @@
 const MapWrap = require("../lib");
-const key = require("../lib/config");
+const { GOOGLE_API_KEY } = require("./testUtils").requireConfig();
 const chai = require("chai");
 const asserttype = require("chai-asserttype");
 const chaiAsPromised = require("chai-as-promised");
@@ -8,6 +8,10 @@ chai.use(asserttype);
 chai.use(chaiAsPromised)
 
 const expect = chai.expect;
+
+if (!GOOGLE_API_KEY) {
+  return;
+}
 
 describe("MapWrap.directions", async () => {
   
@@ -27,7 +31,7 @@ describe("MapWrap.directions", async () => {
     let response;
 
     before("should instantiate mapwrap", () => {
-      mapWrapInstance = new MapWrap(key.GOOGLE_API_KEY);
+      mapWrapInstance = MapWrap(GOOGLE_API_KEY);
     });
 
     it("should throw an error", async () => {
@@ -145,7 +149,7 @@ describe("MapWrap.directions", async () => {
     let response;
 
     before("should instantiate mapwrap", () => {
-      mapWrapInstance = new MapWrap(key.GOOGLE_API_KEY);
+      mapWrapInstance = MapWrap(GOOGLE_API_KEY);
     });
 
     it("should test combinations of destination and origin that are not real locations", async () => {
@@ -203,7 +207,7 @@ describe("MapWrap.directions", async () => {
     let response;
 
     before("should instantiate mapwrap", () => {
-      mapWrapInstance = new MapWrap(key.GOOGLE_API_KEY);
+      mapWrapInstance = MapWrap(GOOGLE_API_KEY);
     });
 
     it("should test DirectionsWrapper.getStartAddress", async () => {

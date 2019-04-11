@@ -1,5 +1,5 @@
 const MapWrap = require("../lib");
-const key = require("../lib/config");
+const { GOOGLE_API_KEY } = require("./testUtils").requireConfig();
 const chai = require("chai");
 const asserttype = require("chai-asserttype");
 const chaiAsPromised = require("chai-as-promised");
@@ -9,6 +9,10 @@ chai.use(chaiAsPromised)
 
 const expect = chai.expect;
 
+if (!GOOGLE_API_KEY) {
+  return;
+}
+
 describe("MapWrap.nearbySearchPlaces", async () => {
   
   describe.skip("Testing Joi schema validation", async () => {
@@ -16,7 +20,7 @@ describe("MapWrap.nearbySearchPlaces", async () => {
     let lat = 33.651021, lng = -117.841550;
 
     before("should instantiate mapwrap", () => {
-      mapWrapInstance = new MapWrap(key.GOOGLE_API_KEY);
+      mapWrapInstance = MapWrap(GOOGLE_API_KEY);
     });
 
     it("should test an empty options object", async () => {
@@ -107,7 +111,7 @@ describe("MapWrap.nearbySearchPlaces", async () => {
     };
 
     before("should instantiate mapwrap", () => {
-      mapWrapInstance = new MapWrap(key.GOOGLE_API_KEY);
+      mapWrapInstance = MapWrap(GOOGLE_API_KEY);
     });
   
     beforeEach(() => {
@@ -132,6 +136,14 @@ describe("MapWrap.nearbySearchPlaces", async () => {
       response = await mapWrapInstance.nearbySearchPlaces(params);
       expect(response.getResults()).to.be.an("array").that.is.not.empty;
     })
+
+    it("will get next page results", async () => {
+      response = await mapWrapInstance.nearbySearchPlaces(params);
+      const nextPage = await mapWrapInstance.additionalPlaces(response.getNextPageToken());
+      expect(await mapWrapInstance.nearbySearchPlaces(params)).to.be.equal(response);
+      expect(nextPage).to.not.be.equal(response);
+      expect(nextPage.getResults()).to.be.an("array").that.is.not.empty;
+    }); 
 
   });
 

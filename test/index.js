@@ -1,5 +1,5 @@
 const MapWrap = require("../lib");
-const key = require("../lib/config");
+const { GOOGLE_API_KEY } = require("./testUtils").requireConfig();
 const chai = require("chai");
 const asserttype = require("chai-asserttype");
 const chaiAsPromised = require("chai-as-promised");
@@ -9,14 +9,18 @@ chai.use(chaiAsPromised)
 
 const expect = chai.expect;
 
+if (!GOOGLE_API_KEY) {
+  return;
+}
+
 describe("MapWrap", () => {
   it("should throw an error", () => {
-    expect(() => new MapWrap()).to.throw();
-    expect(() => new MapWrap(null, -1)).to.throw();
-    expect(() => new MapWrap(key.GOOGLE_API_KEY, -1)).to.throw();
+    expect(() => MapWrap()).to.throw();
+    expect(() => MapWrap(null, -1)).to.throw();
+    expect(() => MapWrap(GOOGLE_API_KEY, -1)).to.throw();
   });
   it("should not throw an error", () => {
-    expect(() => new MapWrap(key.GOOGLE_API_KEY)).to.not.throw();
-    expect(() => new MapWrap(key.GOOGLE_API_KEY, 15)).to.not.throw();
+    expect(() => MapWrap(GOOGLE_API_KEY)).to.not.throw();
+    expect(() => MapWrap(GOOGLE_API_KEY, 15)).to.not.throw();
   });
 });
