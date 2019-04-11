@@ -9,7 +9,7 @@ chai.use(chaiAsPromised)
 
 const expect = chai.expect;
 
-describe("MapWrap.placeDetails", async () => {
+describe.skip("MapWrap.placeDetails", async () => {
 
   let mapWrapInstance;
   let response;
