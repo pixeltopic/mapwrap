@@ -1,5 +1,1 @@
-exports.printMsg = function() {
-  console.log("Hello world");
-}
-
-exports.printMsg();
+module.exports = require("./lib");
