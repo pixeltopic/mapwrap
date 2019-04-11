@@ -45,6 +45,7 @@ describe.skip("MapWrap.geocode", () => {
   });
 
   it("should retrieve a cached object", async () => {
+    response = await mapWrapInstance.geocode("Campus Drive Irvine");
     const cached = await mapWrapInstance.geocode("Campus Drive Irvine");
     expect(cached).to.be.equal(response);
 

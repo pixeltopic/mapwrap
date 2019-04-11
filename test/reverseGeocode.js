@@ -13,21 +13,19 @@ describe.skip("MapWrap.reverseGeocode", () => {
   let mapWrapInstance;
   let response;
 
-  before("should instantiate mapwrap", function() {
+  before("should instantiate mapwrap", () => {
     mapWrapInstance = new MapWrap(key.GOOGLE_API_KEY);
   });
 
-  it("should make a request with a lat lng", async () => {
+  it("should get all the address results", async () => {
     response = await mapWrapInstance.reverseGeocode(33.651021, -117.841550);
-  });
-
-  it("should get all the address results", () => {
     const addrResults = response.getAllAddresses();
     expect(addrResults).to.be.array();
     expect(addrResults).to.have.length.greaterThan(0, "The address array was empty");
   });
 
-  it("should test functionality of getTopAddress", () => {
+  it("should test functionality of getTopAddress", async () => {
+    response = await mapWrapInstance.reverseGeocode(33.651021, -117.841550);
     const addrObj = response.getTopAddress();
     // console.log(addrObj);
     expect(addrObj).to.be.object();
@@ -39,15 +37,13 @@ describe.skip("MapWrap.reverseGeocode", () => {
   });
 
   it("should retrieve a cached object", async () => {
+    response = await mapWrapInstance.reverseGeocode(33.651021, -117.841550);
     const cached = await mapWrapInstance.reverseGeocode(33.651021, -117.841550);
     expect(cached).to.be.equal(response);
-
   });
 
-  it("should attempt to find a nonexistent location", async () => {
-    response = await mapWrapInstance.reverseGeocode(9999999, 9999999);
-    expect(response.getAllAddresses()).to.be.an("array").that.is.empty;
-    expect(response.getTopAddress()).to.be.null;
+  it("should attempt to find a nonexistent location", () => {
+      expect(mapWrapInstance.reverseGeocode(9999999, 9999999)).to.be.rejectedWith(Error);
   });
 
   it("should throw a type error", () => {

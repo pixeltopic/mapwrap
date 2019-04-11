@@ -154,30 +154,22 @@ describe("MapWrap.directions", async () => {
       
       response = await mapWrapInstance.directions(params);
       
-      expect(response.googleResponse).to.be.object();
-      expect(response.googleResponse).to.have.property("routes");
-      expect(response.googleResponse.routes).to.be.array();
-      expect(response.googleResponse.routes).to.be.an("array").that.is.empty;
+      expect(response._routes).to.be.an("array").that.is.empty;
 
       params.origin = "Another fake place";
       params.destination = "Irvine";
       
       response = await mapWrapInstance.directions(params);
       
-      expect(response.googleResponse).to.be.object();
-      expect(response.googleResponse).to.have.property("routes");
-      expect(response.googleResponse.routes).to.be.array();
-      expect(response.googleResponse.routes).to.be.an("array").that.is.empty;
+      expect(response._routes).to.be.an("array").that.is.empty;
+     
 
       params.origin = "Anaheim";
       params.destination = "Some fake place";
 
       response = await mapWrapInstance.directions(params);
       
-      expect(response.googleResponse).to.be.object();
-      expect(response.googleResponse).to.have.property("routes");
-      expect(response.googleResponse.routes).to.be.array();
-      expect(response.googleResponse.routes).to.be.an("array").that.is.empty;
+      expect(response._routes).to.be.an("array").that.is.empty;
       
     });
 
