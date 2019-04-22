@@ -16,11 +16,48 @@ if (!GOOGLE_API_KEY) {
 describe("MapWrap", () => {
   it("should throw an error", () => {
     expect(() => MapWrap()).to.throw();
-    expect(() => MapWrap(null, -1)).to.throw();
-    expect(() => MapWrap(GOOGLE_API_KEY, -1)).to.throw();
+    expect(() => MapWrap({})).to.throw();
+    expect(() => MapWrap({ DEFAULT_API_KEY: "" })).to.throw();
+    expect(() => MapWrap({
+      DEFAULT_API_KEY: GOOGLE_API_KEY,
+      logCache: true, 
+      useRestrictedKeys: {
+        DIRECTIONS_API_KEY: null,
+      }
+    })).to.throw();
+    expect(() => MapWrap({
+      DEFAULT_API_KEY: GOOGLE_API_KEY,
+      logCache: true, 
+      useRestrictedKeys: {
+        DIRECTIONS_API_KEY: null,
+      },
+      nearbySearchCacheSize: 15, 
+      placeDetailsCacheSize: -1
+    })).to.throw();
   });
   it("should not throw an error", () => {
-    expect(() => MapWrap(GOOGLE_API_KEY)).to.not.throw();
-    expect(() => MapWrap(GOOGLE_API_KEY, 15)).to.not.throw();
+    expect(() => MapWrap({
+      DEFAULT_API_KEY: GOOGLE_API_KEY,
+      logCache: true, 
+      useRestrictedKeys: {
+        GEOCODING_API_KEY: "geocoding_api_key",
+      }
+    })).to.not.throw();
+    expect(() => MapWrap({
+      DEFAULT_API_KEY: GOOGLE_API_KEY,
+      logCache: false,
+      useRestrictedKeys: {
+      
+      },
+    })).to.not.throw();
+    expect(() => MapWrap({
+      DEFAULT_API_KEY: GOOGLE_API_KEY,
+      logCache: true, 
+      useRestrictedKeys: {
+        GEOCODING_API_KEY: "geocoding_api_key",
+      },
+      nearbySearchCacheSize: 15, 
+      placeDetailsCacheSize: 10
+    })).to.not.throw();
   });
 });
