@@ -1,21 +1,21 @@
-## MapWrap :pushpin:
+# MapWrap :pushpin:
 
-### About
----
+## About
+
 MapWrap is a simple wrapper around the Google Maps API for Geocoding, Directions, and Places (Nearby Search, Place Details). It provides simple methods to access data members in the API response with error checking.
 
 MapWrap also implements a simple LRU cache to speed up requests and decrease the amount of unnecessary calls to the server. It is fully compliant with Google's restriction of not caching data for over 30 days.
 
-### Usage
----
+## Usage
+
 ```js
 const MapWrap = require("mapwrap");
 const mapwrap = MapWrap({
-  DEFAULT_API_KEY: "my_google_api_key, 
+  DEFAULT_API_KEY: "my_google_api_key", 
   useRestrictedKeys: {
-      GEOCODING_API_KEY: "geocoding_api_key", // takes precedence over your default api key, in case you set up key restrictions
-      DIRECTIONS_API_KEY: "directions_api_key", // these are null by default. Only the default key is necessary to get started.
-      PLACES_API_KEY: "places_api_key"
+    GEOCODING_API_KEY: "geocoding_api_key", // takes precedence over your default api key, in case you set up key restrictions
+    DIRECTIONS_API_KEY: "directions_api_key", // these are null by default. Only the default key is necessary to get started.
+    PLACES_API_KEY: "places_api_key"
   }, 
   reverseGeoCacheSize: 20, // set the size of your LRU cache (all cache sizes are 10 by default)
   geoCacheSize: 20, 
@@ -23,7 +23,7 @@ const mapwrap = MapWrap({
   nearbySearchCacheSize: 10, 
   placeDetailsCacheSize: 10,
   logCache: true // prints a message when the cache is accessed. (false by default)
-  });
+});
 
 const geocode = async () => {
   const payload = await mapwrap.geocode("Staples Center, LA");
@@ -35,6 +35,12 @@ const directions = async params => {
   return payload;
 }
 
-console.log(directions({ origin: "Anaheim", destination: "Irvine", mode: "driving" }).getStartAddress());
+console.log(
+  directions({ 
+    origin: "Anaheim", 
+    destination: "Irvine", 
+    mode: "driving" 
+  }).getStartAddress()
+);
 
 ```
