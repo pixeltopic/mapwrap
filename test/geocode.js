@@ -18,7 +18,7 @@ describe.skip("MapWrap.geocode", () => {
   let response;
 
   before("should instantiate mapwrap", function() {
-    mapWrapInstance = MapWrap(GOOGLE_API_KEY);
+    mapWrapInstance = MapWrap(require("./testUtils").mapwrapDefaultConfig());
   });
 
   it("should throw a type error", () => {

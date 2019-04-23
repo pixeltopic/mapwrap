@@ -19,7 +19,7 @@ describe.skip("MapWrap.placeDetails", async () => {
   let response;
 
   before("should instantiate mapwrap", () => {
-    mapWrapInstance = MapWrap(GOOGLE_API_KEY);
+    mapWrapInstance = MapWrap(require("./testUtils").mapwrapDefaultConfig());
   });
 
   it("should test invalid IDs", () => {

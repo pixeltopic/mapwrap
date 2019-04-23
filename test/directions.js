@@ -31,7 +31,7 @@ describe("MapWrap.directions", async () => {
     let response;
 
     before("should instantiate mapwrap", () => {
-      mapWrapInstance = MapWrap(GOOGLE_API_KEY);
+      mapWrapInstance = MapWrap(require("./testUtils").mapwrapDefaultConfig());
     });
 
     it("should throw an error", async () => {
@@ -149,7 +149,7 @@ describe("MapWrap.directions", async () => {
     let response;
 
     before("should instantiate mapwrap", () => {
-      mapWrapInstance = MapWrap(GOOGLE_API_KEY);
+      mapWrapInstance = MapWrap(require("./testUtils").mapwrapDefaultConfig());
     });
 
     it("should test combinations of destination and origin that are not real locations", async () => {
@@ -207,7 +207,7 @@ describe("MapWrap.directions", async () => {
     let response;
 
     before("should instantiate mapwrap", () => {
-      mapWrapInstance = MapWrap(GOOGLE_API_KEY);
+      mapWrapInstance = MapWrap(require("./testUtils").mapwrapDefaultConfig());
     });
 
     it("should test DirectionsWrapper.getStartAddress", async () => {

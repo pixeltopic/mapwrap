@@ -20,7 +20,7 @@ describe("MapWrap.nearbySearchPlaces", async () => {
     let lat = 33.651021, lng = -117.841550;
 
     before("should instantiate mapwrap", () => {
-      mapWrapInstance = MapWrap(GOOGLE_API_KEY);
+      mapWrapInstance = MapWrap(require("./testUtils").mapwrapDefaultConfig());
     });
 
     it("should test an empty options object", async () => {
@@ -96,31 +96,28 @@ describe("MapWrap.nearbySearchPlaces", async () => {
 
     let units = "imperial";
     let minprice = -1, maxprice = -1;
-    let radius = 15;
+    let radius = 30;
     let type = null;
     let lat = 33.651021, lng = -117.841550;
 
     let params = {
       location: { lat, lng },
       radius,
-      keyword: "cha",
+      keyword: "starbucks",
       units,
       ...type && { type },
       ...(minprice !== -1 && minprice !== undefined) && { minprice },
       ...(maxprice !== -1 && maxprice !== undefined) && { maxprice }, // this needs testing.
     };
 
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
     before("should instantiate mapwrap", () => {
-      mapWrapInstance = MapWrap(GOOGLE_API_KEY);
+      mapWrapInstance = MapWrap(require("./testUtils").mapwrapDefaultConfig());
     });
-  
-    beforeEach(() => {
-      units = "imperial";
-      minprice = -1, maxprice = -1;
-      radius = 15;
-      type = null;
-      lat = 33.651021, lng = -117.841550;
-    });
+
   
     it("will make a call to the places endpoint and hit the cache", async () => {
       response = await mapWrapInstance.nearbySearchPlaces(params);
@@ -137,8 +134,12 @@ describe("MapWrap.nearbySearchPlaces", async () => {
       expect(response.getResults()).to.be.an("array").that.is.not.empty;
     })
 
-    it("will get next page results", async () => {
+    it("will get next page results", async function() {
+      this.timeout(15000);
       response = await mapWrapInstance.nearbySearchPlaces(params);
+     
+      await sleep(3000); // timeout is necessary because there is a delay before google next page token becomes valid.
+     
       const nextPage = await mapWrapInstance.additionalPlaces(response.getNextPageToken());
       expect(await mapWrapInstance.nearbySearchPlaces(params)).to.be.equal(response);
       expect(nextPage).to.not.be.equal(response);
