@@ -1,11 +1,12 @@
 {
   "name": "mapwrap",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple wrapper around Google Maps API",
   "main": "index.js",
   "scripts": {
     "test": "mocha --recursive test",
     "start": "node index.js",
+    "build": "npx babel lib --out-dir dist",
     "dev": "nodemon index.js --delay 1"
   },
   "repository": {
@@ -21,6 +22,9 @@
   "author": "pixeltopic",
   "license": "ISC",
   "devDependencies": {
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "chai-asserttype": "^1.0.5",
