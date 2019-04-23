@@ -10,7 +10,7 @@ MapWrap also implements a simple LRU cache to speed up requests and decrease the
 
 ## Installation
 ```
-$ npm install --save mapwrap
+npm install --save mapwrap
 ```
 
 ## Usage
