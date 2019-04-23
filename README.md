@@ -10,11 +10,12 @@ MapWrap also implements a simple LRU cache to speed up requests and decrease the
 
 ```js
 const MapWrap = require("mapwrap");
+
 const mapwrap = MapWrap({
   DEFAULT_API_KEY: "my_google_api_key", 
   useRestrictedKeys: {
-    GEOCODING_API_KEY: "geocoding_api_key", // takes precedence over your default api key, in case you set up key restrictions
-    DIRECTIONS_API_KEY: "directions_api_key", // these are null by default. Only the default key is necessary to get started.
+    GEOCODING_API_KEY: "geocoding_api_key", // optional keys with priority over default for specific API services
+    DIRECTIONS_API_KEY: "directions_api_key", // these are null by default.
     PLACES_API_KEY: "places_api_key"
   }, 
   reverseGeoCacheSize: 20, // set the size of your LRU cache (all cache sizes are 10 by default)
@@ -31,7 +32,7 @@ const geocode = async () => {
 }
 
 const directions = async params => {
-  const payload = await mapWrapInstance.directions(params);
+  const payload = await mapwrap.directions(params);
   return payload;
 }
 
