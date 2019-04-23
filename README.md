@@ -1,6 +1,6 @@
 # MapWrap :pushpin:
 
-[![npm version](https://badge.fury.io/js/mapwrap.svg)](https://badge.fury.io/js/mapwrap)
+[![npm version](https://badge.fury.io/js/mapwrap.svg)](https://badge.fury.io/js/mapwrap) ![npm bundle size](https://img.shields.io/bundlephobia/min/mapwrap.svg)
 
 ## About
 
