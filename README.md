@@ -43,12 +43,15 @@ const directions = async params => {
   return payload;
 }
 
-console.log(
-  directions({ 
-    origin: "Anaheim", 
-    destination: "Irvine", 
-    mode: "driving" 
-  }).getStartAddress()
-);
+let payload = await directions({ 
+  origin: "Anaheim", 
+  destination: "Irvine", 
+  mode: "driving" 
+});
+ 
+console.log(payload.getStartAddress());
 
 ```
+Usage documentation will be updated to be more thorough in the future. For more usage examples, they can be found in the test folder on the Github repo.
+
+If any bugs are found, please don't hesitate to open an issue on the project repo. I'll do my best to address them.
