@@ -1,8 +1,9 @@
 {
   "name": "mapwrap",
-  "version": "1.0.7",
+  "version": "1.0.9",
   "description": "Simple wrapper around Google Maps API",
   "main": "index.js",
+  "types": "./index.d.ts",
   "scripts": {
     "test": "mocha --recursive test",
     "start": "node index.js",
