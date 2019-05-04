@@ -1,8 +1,5 @@
 declare namespace mapwrap {
-  // export function MapWrapInit (config: MapWrapConfig): MapWrapClass
-  // export function MapWrapInit (config: MapWrapConfig): (config: MapWrapConfig) => MapWrapClass
-  // export function MapWrapInit (config: MapWrapConfig): MapWrapClass
-
+  
   class MapWrapClass {
     private _logCache: boolean;
 
@@ -10,18 +7,43 @@ declare namespace mapwrap {
 
     public reverseGeocode(lat: number, lng: number): Promise<ReverseGeoWrapperClass>
 
+    public directions(params: directionsConfig): Promise<DirectionsWrapperClass>
+
+    public nearbySearchPlaces(params: nearbySearchPlacesConfig): Promise<PlaceSearchWrapperClass>
+
+    public additionalPlaces(nextPageToken: string): Promise<PlaceSearchWrapperClass>
+
+    public placeDetails(placeId: string): Promise<Object>
+
   } 
 
   class GeoWrapperClass {
-    public getTopAddress(formatted?: boolean): string|object|null
+    public getTopAddress(formatted?: boolean): string|object
 
     public getAllAddresses(): object[]|null
   }
 
   class ReverseGeoWrapperClass {
-    public getTopAddress(formatted?: boolean): string|object|null
+    public getTopAddress(formatted?: boolean): string|object
 
-    public getAllAddresses(): object[]|null
+    public getAllAddresses(): object[]
+  }
+
+  class DirectionsWrapperClass {
+    public getStatus(): string
+    public getErrorMessage(): string
+    public getStartAddress(routeNum?: number): string
+    public getEndAddress(routeNum?: number): string
+    public getRoute(routeNum?: number): object
+    public getRouteSteps(routeNum?: number): object[]
+    public getRoutes(): object[]
+  }
+
+  class PlaceSearchWrapperClass {
+    public getStatus(): string
+    public getErrorMessage(): string
+    public getNextPageToken(): string
+    public getResults(): object[]
   }
 
   interface MapWrapConfig {
@@ -37,6 +59,31 @@ declare namespace mapwrap {
     directionsCacheSize?: number,
     nearbySearchCacheSize?: number,
     placeDetailsCacheSize?: number
+  }
+
+  interface directionsConfig {
+    origin: string,
+    destination: string,
+    mode?: string,
+    units?: string,
+    altRoutes?: boolean,
+    avoidFerries?: boolean,
+    avoidHighways?: boolean,
+    avoidIndoor?: boolean,
+    avoidTolls?: boolean
+  }
+
+  interface nearbySearchPlacesConfig {
+    location: {
+      lat: number,
+      lng: number
+    },
+    radius: number,
+    units?: string, 
+    keyword?: string, 
+    type?: string,
+    minprice?: number,
+    maxprice?: number
   }
 
 }
