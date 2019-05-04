@@ -7,9 +7,9 @@ declare namespace mapwrap {
 
     public reverseGeocode(lat: number, lng: number): Promise<ReverseGeoWrapperClass>
 
-    public directions(params: directionsConfig): Promise<DirectionsWrapperClass>
+    public directions(params: directionsParams): Promise<DirectionsWrapperClass>
 
-    public nearbySearchPlaces(params: nearbySearchPlacesConfig): Promise<PlaceSearchWrapperClass>
+    public nearbySearchPlaces(params: nearbySearchPlacesParams): Promise<PlaceSearchWrapperClass>
 
     public additionalPlaces(nextPageToken: string): Promise<PlaceSearchWrapperClass>
 
@@ -61,7 +61,7 @@ declare namespace mapwrap {
     placeDetailsCacheSize?: number
   }
 
-  interface directionsConfig {
+  interface directionsParams {
     origin: string,
     destination: string,
     mode?: string,
@@ -73,7 +73,7 @@ declare namespace mapwrap {
     avoidTolls?: boolean
   }
 
-  interface nearbySearchPlacesConfig {
+  interface nearbySearchPlacesParams {
     location: {
       lat: number,
       lng: number
