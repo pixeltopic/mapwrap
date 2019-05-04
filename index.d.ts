@@ -20,7 +20,7 @@ declare namespace mapwrap {
   class GeoWrapperClass {
     public getTopAddress(formatted?: boolean): string|object
 
-    public getAllAddresses(): object[]|null
+    public getAllAddresses(): object[]
   }
 
   class ReverseGeoWrapperClass {
