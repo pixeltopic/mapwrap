@@ -53,12 +53,24 @@ declare namespace mapwrap {
       DIRECTIONS_API_KEY?: string,
       PLACES_API_KEY?: string
     },
+
     logCache?: boolean,
-    reverseGeoCacheSize?: number,
-    geoCacheSize?: number,
-    directionsCacheSize?: number,
-    nearbySearchCacheSize?: number,
-    placeDetailsCacheSize?: number
+    logger?: Function,
+
+    cacheMaxItemAges?: {
+      reverseGeoCache?: number,
+      geoCache?: number,
+      directionsCache?: number,
+      nearbySearchCache?: number,
+      placeDetailsCache?: number
+    }, 
+    cacheMaxSizes?: {
+      reverseGeoCache?: number,
+      geoCache?: number,
+      directionsCache?: number,
+      nearbySearchCache?: number,
+      placeDetailsCache?: number
+    }
   }
 
   interface directionsParams {

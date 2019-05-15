@@ -1,6 +1,6 @@
 {
   "name": "mapwrap",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Simple wrapper around Google Maps API",
   "main": "index.js",
   "types": "./index.d.ts",
