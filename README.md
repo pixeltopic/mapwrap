@@ -19,18 +19,37 @@ npm install --save mapwrap
 const MapWrap = require("mapwrap");
 
 const mapwrap = MapWrap({
-  DEFAULT_API_KEY: "my_google_api_key", 
+  // DEFAULT_API_KEY is all you need to get started. 
+  // All other config properties are optional.
+  DEFAULT_API_KEY: "my_google_api_key",
+  // Optional keys with priority over default for specific API services.
   useRestrictedKeys: {
-    GEOCODING_API_KEY: "geocoding_api_key", // optional keys with priority over default for specific API services
+    GEOCODING_API_KEY: "geocoding_api_key", 
     DIRECTIONS_API_KEY: "directions_api_key", // these are null by default.
     PLACES_API_KEY: "places_api_key"
-  }, 
-  reverseGeoCacheSize: 20, // set the size of your LRU cache (all cache sizes are 10 by default)
-  geoCacheSize: 20, 
-  directionsCacheSize: 15, 
-  nearbySearchCacheSize: 10, 
-  placeDetailsCacheSize: 10,
-  logCache: true // prints a message when the cache is accessed. (false by default)
+  },
+  // Set the max age (in ms) of an item in the cache before it is pruned.
+  // Default max age is 5 minutes. Min age is 1 minute and max is 30 days.
+  cacheMaxItemAges: {
+    reverseGeoCache: 5 * 60000,
+    geoCache: 20 * 60000,
+    directionsCache: 15 * 60000,
+    nearbySearchCache: 300 * 60000,
+    placeDetailsCache: 300 * 60000,
+  },
+  // Set the size of your LRU cache 
+  // Default cache sizes are 10 items
+  cacheMaxSizes: {
+    reverseGeoCache: 20, 
+    geoCache: 20,
+    directionsCache: 15,
+    nearbySearchCache: 10,
+    placeDetailsCache: 10
+  },
+  // Enable printing of a message when a cache is accessed. False by default.
+  logCache: true,
+  // Use a custom logger function to track cache hits. Defaults to `console.log`.
+  logger: console.info
 });
 
 (async () => {
