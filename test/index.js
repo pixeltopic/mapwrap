@@ -25,14 +25,18 @@ describe("MapWrap", () => {
         DIRECTIONS_API_KEY: null,
       }
     })).to.throw();
+
     expect(() => MapWrap({
       DEFAULT_API_KEY: GOOGLE_API_KEY,
       logCache: true, 
       useRestrictedKeys: {
         DIRECTIONS_API_KEY: null,
       },
-      nearbySearchCacheSize: 15, 
-      placeDetailsCacheSize: -1
+      cacheMaxSizes: {
+        nearbySearchCache: 15, 
+        placeDetailsCache: -1
+      }
+    
     })).to.throw();
   });
   it("should not throw an error", () => {
@@ -43,6 +47,7 @@ describe("MapWrap", () => {
         GEOCODING_API_KEY: "geocoding_api_key",
       }
     })).to.not.throw();
+
     expect(() => MapWrap({
       DEFAULT_API_KEY: GOOGLE_API_KEY,
       logCache: false,
@@ -50,14 +55,35 @@ describe("MapWrap", () => {
       
       },
     })).to.not.throw();
+
     expect(() => MapWrap({
       DEFAULT_API_KEY: GOOGLE_API_KEY,
       logCache: true, 
       useRestrictedKeys: {
         GEOCODING_API_KEY: "geocoding_api_key",
       },
-      nearbySearchCacheSize: 15, 
-      placeDetailsCacheSize: 10
+      cacheMaxItemAges: {
+
+      },
+      cacheMaxSizes: {
+
+      }
+    })).to.not.throw();
+
+    expect(() => MapWrap({
+      DEFAULT_API_KEY: GOOGLE_API_KEY,
+      logCache: true, 
+      useRestrictedKeys: {
+        GEOCODING_API_KEY: "geocoding_api_key",
+      },
+      cacheMaxItemAges: {
+        geoCache: 120000,
+        placeDetailsCache: 1000 * 60 * 60 * 24
+      },
+      cacheMaxSizes: {
+        directionsCache: 10,
+        placeDetailsCache: 30
+      }
     })).to.not.throw();
   });
 });
