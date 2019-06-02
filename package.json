@@ -1,6 +1,6 @@
 {
   "name": "mapwrap",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Simple wrapper around Google Maps API",
   "main": "index.js",
   "types": "./index.d.ts",
@@ -34,7 +34,7 @@
     "nodemon": "^1.18.10"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.19.0",
     "joi": "^14.3.1",
     "lru-cache": "^5.1.1"
   }
