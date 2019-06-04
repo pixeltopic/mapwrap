@@ -1,4 +1,4 @@
-const MapWrap = require("../lib");
+const MapWrap = require("./testUtils").selectEnvTest()
 const { GOOGLE_API_KEY } = require("./testUtils").requireConfig();
 const chai = require("chai");
 const asserttype = require("chai-asserttype");
