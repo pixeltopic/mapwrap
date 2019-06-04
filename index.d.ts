@@ -91,7 +91,6 @@ declare namespace mapwrap {
       lng: number
     },
     radius: number,
-    units?: string, 
     keyword?: string, 
     type?: string,
     minprice?: number,

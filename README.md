@@ -2,6 +2,8 @@
 
 [![npm version](https://badge.fury.io/js/mapwrap.svg)](https://badge.fury.io/js/mapwrap) ![npm bundle size](https://img.shields.io/bundlephobia/min/mapwrap.svg)
 
+### [Changelog - updated for 2.1.0](https://github.com/pixeltopic/mapwrap/blob/master/CHANGELOG.md)
+
 ## About
 
 MapWrap is a simple wrapper around the Google Maps API for Geocoding, Directions, and Places (Nearby Search, Place Details). It provides simple methods to access data members in the API response with error checking.
@@ -99,9 +101,9 @@ const mapwrap = MapWrap({
         lat: 33.651021, 
         lng: -117.841550
       },
-      radius: 30,
+      radius: 30000, // radius in meters to search nearby.
       keyword: "starbucks", // optional
-      units: "imperial" // or "metric"
+      // units: "imperial" As of 2.1.0, No longer needed.
     });
 
     console.log(placeSearchWrapper.getResults());

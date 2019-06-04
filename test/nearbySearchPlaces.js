@@ -44,45 +44,47 @@ describe("MapWrap.nearbySearchPlaces", async () => {
       expect(mapWrapInstance.nearbySearchPlaces({ location: { lat, lng }, radius: -1 })).be.rejectedWith(Error);
     });
 
-    it("should test the units key", async () => {
-      expect(mapWrapInstance.nearbySearchPlaces({ 
-        location: { lat, lng }, 
-        radius: "15",
-        units: "metric"
-      })).to.not.be.rejectedWith(Error);
-      expect(mapWrapInstance.nearbySearchPlaces({ 
-        location: { lat, lng }, 
-        radius: "15",
-        units: "imperial"
-      })).to.not.be.rejectedWith(Error);
-      expect(mapWrapInstance.nearbySearchPlaces({ 
-        location: { lat, lng }, 
-        radius: "15",
-        units: "foobar"
-      })).to.be.rejectedWith(Error);
-      expect(mapWrapInstance.nearbySearchPlaces({ 
-        location: { lat, lng }, 
-        radius: "15",
-        units: ""
-      })).to.be.rejectedWith(Error);
-    });
+    // obsolete tests 
+
+    // it("should test the units key", async () => {
+    //   expect(mapWrapInstance.nearbySearchPlaces({ 
+    //     location: { lat, lng }, 
+    //     radius: "15",
+    //     units: "metric"
+    //   })).to.not.be.rejectedWith(Error);
+    //   expect(mapWrapInstance.nearbySearchPlaces({ 
+    //     location: { lat, lng }, 
+    //     radius: "15",
+    //     units: "imperial"
+    //   })).to.not.be.rejectedWith(Error);
+    //   expect(mapWrapInstance.nearbySearchPlaces({ 
+    //     location: { lat, lng }, 
+    //     radius: "15",
+    //     units: "foobar"
+    //   })).to.be.rejectedWith(Error);
+    //   expect(mapWrapInstance.nearbySearchPlaces({ 
+    //     location: { lat, lng }, 
+    //     radius: "15",
+    //     units: ""
+    //   })).to.be.rejectedWith(Error);
+    // });
 
     it("should test a fully configured options object", async () => {
       expect(mapWrapInstance.nearbySearchPlaces({
         location: { lat, lng },
-        radius: 20,
+        radius: 20000,
         keyword: "cha",
-        units: "metric",
+        
         type: "restaurant",
         minprice: -1,
         maxprice: -1,
       })).to.not.be.rejectedWith(Error);
       expect(mapWrapInstance.nearbySearchPlaces({
         location:{ lat, lng },
-        radius: 20,
+        radius: 20000,
         keyword: "cha",
         type: "restaurant",
-        units: "metric",
+        
         minprice: 1,
         maxprice: -1,
       })).to.be.rejectedWith(Error);
@@ -94,9 +96,8 @@ describe("MapWrap.nearbySearchPlaces", async () => {
     let mapWrapInstance;
     let response;
 
-    let units = "imperial";
     let minprice = -1, maxprice = -1;
-    let radius = 30;
+    let radius = 49000;
     let type = null;
     let lat = 33.651021, lng = -117.841550;
 
@@ -104,7 +105,6 @@ describe("MapWrap.nearbySearchPlaces", async () => {
       location: { lat, lng },
       radius,
       keyword: "starbucks",
-      units,
       ...type && { type },
       ...(minprice !== -1 && minprice !== undefined) && { minprice },
       ...(maxprice !== -1 && maxprice !== undefined) && { maxprice }, // this needs testing.

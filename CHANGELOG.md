@@ -1,3 +1,9 @@
+## Version 2.1.0
+- Made `nearbySearchPlaces` no longer require a unit field in the config. `radius` property in the config now accepts a value from 1 to 50000 in meters.
+
+## Version 2.0.1
+- Axios dependency updated due to security issues.
+
 ## Version 2.0.0
 - Config object schema overhauled to provide more flexibility. **New config schema is partially incompatible with 1.x.x versions.**
   - cache size settings have all been renamed and can now be configured via the `cacheMaxSizes` key in the config, with its value being an object with the following optional settings:
