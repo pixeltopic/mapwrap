@@ -30,7 +30,7 @@
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "chai-asserttype": "^1.0.5",
-    "mocha": "^6.0.2",
+    "mocha": "^7.1.1",
     "nodemon": "^2.0.2"
   },
   "dependencies": {
